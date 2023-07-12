@@ -9,8 +9,16 @@ import engine.player.CPU;
  */
 public class Board {
 
+  /*
+   * Representation of the state of the board
+   */
+  public enum BoardState {
+    PLAYING, X_WINS, O_WINS, DRAW
+  }
+
   private final Square[][] grid;
   private BoardState boardState;
+
   public final int length;
 
   /**
@@ -35,12 +43,12 @@ public class Board {
    * @param col   : the provided column index
    * @param state : the provided engine.board.Square State.
    */
-  public void setSquare(int row, int col, SquareState state) throws IllegalAccessException {
-    if (state.equals(SquareState.EMPTY)) {
+  public void setSquare(int row, int col, Square.SquareState state) throws IllegalAccessException {
+    if (state.equals(Square.SquareState.EMPTY)) {
       throw new IllegalAccessException("Can't set square to an EMPTY boardState.");
     }
 
-    if (grid[row][col].getState() == SquareState.EMPTY) {
+    if (grid[row][col].getState() == Square.SquareState.EMPTY) {
       grid[row][col].setState(state);
     } else {
       throw new IllegalAccessException("Square has already been played.");
@@ -49,10 +57,10 @@ public class Board {
 
   /**
    * Checks if a win has been achieved by a player either by; N player SquareStates in a row, N
-   * player SquareStates in col or N player engine.board.SquareState in diagonal (upwards or downward)
-   * (Where N is the size of the grid) and then sets the board boardState to: PLAYING : No win found
-   * X_WINS : engine.player.Player with X engine.board.SquareState has won O_WINS : engine.player.Player with O
-   * engine.board.SquareState has won
+   * player SquareStates in col or N player engine.board.Square.SquareState in diagonal (upwards or
+   * downward) (Where N is the size of the grid) and then sets the board boardState to: PLAYING : No
+   * win found X_WINS : engine.player.Player with X engine.board.Square.SquareState has won O_WINS :
+   * engine.player.Player with O engine.board.Square.SquareState has won
    */
   public void checkForWin() {
     for (int row = 0; row < length; row++) {
@@ -61,10 +69,10 @@ public class Board {
           grid[row][1].getState() == grid[row][2].getState()
       ) {
         //check for X
-        if (grid[row][0].getState() == SquareState.X) {
+        if (grid[row][0].getState() == Square.SquareState.X) {
           boardState = BoardState.X_WINS;
           return;
-        } else if (grid[row][0].getState() == SquareState.O) { //check for O
+        } else if (grid[row][0].getState() == Square.SquareState.O) { //check for O
           boardState = BoardState.O_WINS;
           return;
         }
@@ -77,10 +85,10 @@ public class Board {
           grid[1][col].getState() == grid[2][col].getState()
       ) {
         //check for X
-        if (grid[0][col].getState() == SquareState.X) {
+        if (grid[0][col].getState() == Square.SquareState.X) {
           boardState = BoardState.X_WINS;
           return;
-        } else if (grid[0][col].getState() == SquareState.O) { //check for O
+        } else if (grid[0][col].getState() == Square.SquareState.O) { //check for O
           boardState = BoardState.O_WINS;
           return;
         }
@@ -90,10 +98,10 @@ public class Board {
     //check diagonals
     if (grid[0][0].getState() == grid[1][1].getState()
         && grid[1][1].getState() == grid[2][2].getState()) {
-      if (grid[0][0].getState() == SquareState.X) {
+      if (grid[0][0].getState() == Square.SquareState.X) {
         boardState = BoardState.X_WINS;
         return;
-      } else if (grid[0][0].getState() == SquareState.O) {
+      } else if (grid[0][0].getState() == Square.SquareState.O) {
         boardState = BoardState.O_WINS;
         return;
       }
@@ -101,10 +109,10 @@ public class Board {
 
     if (grid[0][2].getState() == grid[1][1].getState()
         && grid[1][1].getState() == grid[2][0].getState()) {
-      if (grid[0][2].getState() == SquareState.X) {
+      if (grid[0][2].getState() == Square.SquareState.X) {
         boardState = BoardState.X_WINS;
         return;
-      } else if (grid[0][2].getState() == SquareState.O) {
+      } else if (grid[0][2].getState() == Square.SquareState.O) {
         boardState = BoardState.O_WINS;
         return;
       }
@@ -118,14 +126,14 @@ public class Board {
 
 
   /**
-   * Checks for a cell with an EMPTY engine.board.SquareState cell.
+   * Checks for a cell with an EMPTY engine.board.Square.SquareState cell.
    *
    * @return boolean : true if the board is full otherwise false.
    */
   public boolean isBoardFull() {
     for (Square[] row : grid) {
       for (Square col : row) {
-        if (col.getState().equals(SquareState.EMPTY)) {
+        if (col.getState().equals(Square.SquareState.EMPTY)) {
           return false;
         }
       }
@@ -167,7 +175,7 @@ public class Board {
    * @return true if the square is empty
    */
   public boolean isSquareFree(int row, int col) {
-    return grid[row][col].getState() == SquareState.EMPTY;
+    return grid[row][col].getState() == Square.SquareState.EMPTY;
   }
 
   /**
@@ -177,7 +185,7 @@ public class Board {
    * @param col the provided column index
    * @return the SquareState
    */
-  public SquareState getSquare(int row, int col) {
+  public Square.SquareState getSquare(int row, int col) {
     return grid[row][col].getState();
   }
 
@@ -190,7 +198,7 @@ public class Board {
    */
   public void resetSquare(int row, int col, Object o) {
     if (o instanceof CPU) {
-      grid[row][col].setState(SquareState.EMPTY);
+      grid[row][col].setState(Square.SquareState.EMPTY);
     }
   }
 }

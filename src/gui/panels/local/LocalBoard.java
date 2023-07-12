@@ -2,7 +2,7 @@ package gui.panels.local;
 
 import engine.Game;
 import engine.player.Move;
-import engine.board.SquareState;
+import engine.board.Square.SquareState;
 import gui.GUI;
 import gui.panels.ABoardPanel;
 import gui.panels.MainMenu;

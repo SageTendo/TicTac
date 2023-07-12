@@ -1,7 +1,7 @@
 package engine.player;
 
 import engine.board.Board;
-import engine.board.SquareState;
+import engine.board.Square.SquareState;
 
 /**
  * Representation of a player in the game

@@ -5,7 +5,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-import engine.board.SquareState;
+import engine.board.Square.SquareState;
 import utils.Constants;
 
 public abstract class ABoardPanel extends APanel {

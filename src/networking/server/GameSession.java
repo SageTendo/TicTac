@@ -1,7 +1,7 @@
 package networking.server;
 
 import engine.Game;
-import engine.board.SquareState;
+import engine.board.Square.SquareState;
 import utils.Logger;
 
 /**

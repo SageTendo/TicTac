@@ -1,6 +1,6 @@
 package networking.utils;
 
-import engine.board.SquareState;
+import engine.board.Square.SquareState;
 
 /**
  * Represents a move message

@@ -1,7 +1,7 @@
 package engine.player;
 
 import engine.board.Board;
-import engine.board.SquareState;
+import engine.board.Square.SquareState;
 
 /**
  * Represents an AI player of tic-tac-toe

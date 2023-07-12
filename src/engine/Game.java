@@ -1,7 +1,7 @@
 package engine;
 
 import engine.board.Board;
-import engine.board.SquareState;
+import engine.board.Square.SquareState;
 import engine.player.APlayer;
 import engine.player.CPU;
 import engine.player.Player;

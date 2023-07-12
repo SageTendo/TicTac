@@ -1,6 +1,6 @@
 package networking.server;
 
-import engine.board.SquareState;
+import engine.board.Square.SquareState;
 import java.io.IOException;
 import java.net.Socket;
 import networking.utils.AbstractThread;
