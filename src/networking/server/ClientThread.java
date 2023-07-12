@@ -209,7 +209,7 @@ public class ClientThread extends AbstractThread {
         return;
       }
 
-      // 
+      // Make the move on the board and broadcast if it's valid
       SquareState state = session.makeMove(moveMsg.getX(), moveMsg.getY());
       if (state == SquareState.EMPTY) {
         sendMessage(new Message().setType(MessageType.ERR).setContent("Invalid move..."));
@@ -221,11 +221,17 @@ public class ClientThread extends AbstractThread {
 
       // Check for game end
       session.checkForWin();
-      if (session.getWinner() != null) {
-        endGame(new Message().setType(MessageType.GAME_END).setContent(session.getWinner()));
-      } else {
-        // swap player
+
+      // Swap player if game has not ended
+      if (session.getWinner() == null) {
         session.swapPlayer();
+      } else {
+        if (session.getWinner().equals("Draw")) {
+          endGame(new Message().setType(MessageType.GAME_END).setContent("It's a draw!"));
+        } else {
+          endGame(new Message().setType(MessageType.GAME_END)
+              .setContent(session.getWinner()));
+        }
       }
     }
   }

@@ -83,9 +83,13 @@ public class LocalBoard extends ABoardPanel {
       return;
     }
 
-    // Swap the player and play the AI
-    buttonHandler(game.swapPlayer().isNotCPU());
-    playAI();
-    buttonHandler(game.swapPlayer().isNotCPU());
+    // Swap the player and play the AI's move 'if current player is CPU
+    boolean isCPU = game.swapPlayer().isCPU();
+    if (isCPU) {
+      buttonHandler(false);
+      playAI();
+      game.swapPlayer();
+    }
+    buttonHandler(true);
   }
 }

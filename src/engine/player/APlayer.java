@@ -53,7 +53,7 @@ public abstract class APlayer {
   /**
    * @return boolean : true if the player is a CPU
    */
-  public boolean isNotCPU() {
-    return !isCPU;
+  public boolean isCPU() {
+    return isCPU;
   }
 }
